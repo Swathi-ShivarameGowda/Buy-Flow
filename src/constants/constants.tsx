@@ -7,6 +7,7 @@ export const EMAIL = "Email:";
 export const FIRST_NAME = "First Name:";
 export const LAST_NAME = "Last Name:";
 export const NEXT = "Next";
+export const PREVIOUS = "Previous";
 export const PURCHASE = "Purchase";
 export const DEVELOPER_INSURANCE = "Developer Insurance";
 export const VALID_NAME_ERROR =

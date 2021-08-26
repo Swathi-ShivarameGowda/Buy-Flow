@@ -9,10 +9,11 @@ import {
 
 interface FirstNameStepProps {
   cb: (field: string, value: string) => void;
+  fName: string;
 }
 
 const FirstNameStep: React.FC<FirstNameStepProps> = (props) => {
-  const [firstName, setFirstName] = useState("");
+  const [firstName, setFirstName] = useState(props.fName);
   const [error, setError] = useState("");
 
   const handleClick = () => {
@@ -27,7 +28,7 @@ const FirstNameStep: React.FC<FirstNameStepProps> = (props) => {
     }
   };
 
-  const handleChange = (value) => {
+  const handleChange = (value: any) => {
     setFirstName(value);
   };
 

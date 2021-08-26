@@ -1,13 +1,22 @@
 import React, { useState } from "react";
-import { ERROR_MSG, NEXT, AGE, VALID_AGE_ERROR } from "../constants/constants";
+import {
+  ERROR_MSG,
+  NEXT,
+  AGE,
+  VALID_AGE_ERROR,
+  PREVIOUS
+} from "../constants/constants";
 
 interface AgeStepProps {
   cb: (field: string, value: number) => void;
+  pb: (field: string) => void;
+  ag: number;
 }
 
 const AgeStep: React.FC<AgeStepProps> = (props) => {
-  const [age, setAge] = useState(0);
+  const [age, setAge] = useState(props.ag ? props.ag : 0);
   const [error, setError] = useState("");
+
   const handleClick = () => {
     if (age) {
       if (age < 1) {
@@ -19,7 +28,12 @@ const AgeStep: React.FC<AgeStepProps> = (props) => {
       setError(ERROR_MSG);
     }
   };
-  const handleChange = (value) => {
+
+  const handlePreviousClick = () => {
+    props.pb("email");
+  };
+
+  const handleChange = (value: any) => {
     setAge(value);
   };
 
@@ -34,6 +48,7 @@ const AgeStep: React.FC<AgeStepProps> = (props) => {
         ></input>
       </div>
       {error && <p>{error}</p>}
+      <button onClick={handlePreviousClick}>{PREVIOUS}</button>{" "}
       <button onClick={handleClick}>{NEXT}</button>
     </>
   );

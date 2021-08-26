@@ -4,16 +4,20 @@ import {
   EMAIL,
   NEXT,
   EMAIL_REGEX,
-  VALID_EMAIL_ERROR
+  VALID_EMAIL_ERROR,
+  PREVIOUS
 } from "../constants/constants";
 
 interface EmailStepProps {
   cb: (field: string, value: string) => void;
+  pb: (field: string) => void;
+  mail: string;
 }
 
 const EmailStep: React.FC<EmailStepProps> = (props) => {
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState(props.mail);
   const [error, setError] = useState("");
+
   const handleClick = () => {
     if (email) {
       if (!EMAIL_REGEX.test(email)) {
@@ -25,7 +29,12 @@ const EmailStep: React.FC<EmailStepProps> = (props) => {
       setError(ERROR_MSG);
     }
   };
-  const handleChange = (value) => {
+
+  const handlePreviousClick = () => {
+    props.pb("lastName");
+  };
+
+  const handleChange = (value: any) => {
     setEmail(value);
   };
 
@@ -40,6 +49,7 @@ const EmailStep: React.FC<EmailStepProps> = (props) => {
         ></input>
       </div>
       {error && <p>{error}</p>}
+      <button onClick={handlePreviousClick}>{PREVIOUS}</button>{" "}
       <button onClick={handleClick}>{NEXT}</button>
     </>
   );

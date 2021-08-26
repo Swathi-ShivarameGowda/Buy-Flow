@@ -4,15 +4,18 @@ import {
   LAST_NAME,
   NAME_REGEX,
   NEXT,
-  VALID_NAME_ERROR
+  VALID_NAME_ERROR,
+  PREVIOUS
 } from "../constants/constants";
 
 interface LastNameStepProps {
   cb: (field: string, value: string) => void;
+  pb: (field: string) => void;
+  lName: string;
 }
 
 const LastNameStep: React.FC<LastNameStepProps> = (props) => {
-  const [lastName, setLastName] = useState("");
+  const [lastName, setLastName] = useState(props.lName);
   const [error, setError] = useState("");
   const handleClick = () => {
     if (lastName) {
@@ -25,7 +28,10 @@ const LastNameStep: React.FC<LastNameStepProps> = (props) => {
       setError(ERROR_MSG);
     }
   };
-  const handleChange = (value) => {
+  const handlePreviousClick = () => {
+    props.pb("firstName");
+  };
+  const handleChange = (value: any) => {
     setLastName(value);
   };
 
@@ -40,6 +46,7 @@ const LastNameStep: React.FC<LastNameStepProps> = (props) => {
         ></input>
       </div>
       {error && <p>{error}</p>}
+      <button onClick={handlePreviousClick}>{PREVIOUS}</button>{" "}
       <button onClick={handleClick}>{NEXT}</button>
     </>
   );
