@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { ERROR_MSG, LAST_NAME } from "../constants/constants";
 
 interface LastNameStepProps {
   cb: (field: string, value: string) => void;
@@ -8,14 +9,12 @@ const LastNameStep: React.FC<LastNameStepProps> = (props) => {
   const [lastName, setLastName] = useState("");
   const [error, setError] = useState("");
   const handleClick = () => {
-    return lastName
-      ? props.cb("lastName", lastName)
-      : setError("please enter the last name in the above field to continue");
+    return lastName ? props.cb("lastName", lastName) : setError(ERROR_MSG);
   };
   return (
     <>
       <div>
-        Last Name:{" "}
+        {LAST_NAME}{" "}
         <input
           type="lastName"
           onChange={({ target: { value } }) => {

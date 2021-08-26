@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { ERROR_MSG } from "../constants/constants";
 
 interface AgeStepProps {
   cb: (field: string, value: number) => void;
@@ -8,10 +9,9 @@ const AgeStep: React.FC<AgeStepProps> = (props) => {
   const [age, setAge] = useState(0);
   const [error, setError] = useState("");
   const handleClick = () => {
-    return age
-      ? props.cb("age", age)
-      : setError("please enter the age in the above field to continue");
+    return age ? props.cb("age", age) : setError(ERROR_MSG);
   };
+
   return (
     <>
       <div>

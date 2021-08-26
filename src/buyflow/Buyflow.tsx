@@ -4,6 +4,7 @@ import EmailStep from "./EmailStep";
 import SummaryStep from "./SummaryStep";
 import FirstNameStep from "./FirstNameStep";
 import LastNameStep from "./LastNameStep";
+import { DEVELOPER_INSURANCE } from "../constants/constants";
 
 interface BuyflowProps {
   productId: ProductIds;
@@ -14,7 +15,7 @@ export enum ProductIds {
 }
 
 const PRODUCT_IDS_TO_NAMES = {
-  [ProductIds.devIns]: "Developer Insurance"
+  [ProductIds.devIns]: DEVELOPER_INSURANCE
 };
 
 const Buyflow: React.FC<BuyflowProps> = (props) => {
