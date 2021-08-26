@@ -6,6 +6,12 @@ interface FirstNameStepProps {
 
 const FirstNameStep: React.FC<FirstNameStepProps> = (props) => {
   const [firstName, setFirstName] = useState("");
+  const [error, setError] = useState("");
+  const handleClick = () => {
+    return firstName
+      ? props.cb("firstName", firstName)
+      : setError("please enter the first name in the above field to continue");
+  };
   return (
     <>
       <div>
@@ -18,7 +24,8 @@ const FirstNameStep: React.FC<FirstNameStepProps> = (props) => {
           value={firstName}
         ></input>
       </div>
-      <button onClick={() => props.cb("firstName", firstName)}>Next</button>
+      {error && <p>{error}</p>}
+      <button onClick={handleClick}>Next</button>
     </>
   );
 };
