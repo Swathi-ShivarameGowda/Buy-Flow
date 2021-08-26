@@ -5,7 +5,8 @@ import {
   EMAIL,
   FIRST_NAME,
   LAST_NAME,
-  PURCHASE
+  PURCHASE,
+  PREVIOUS
 } from "../constants/constants";
 
 interface SummaryStepProps {
@@ -15,15 +16,18 @@ interface SummaryStepProps {
     email: string;
     age: number;
   };
+  pb: (field: string) => void;
 }
 
 const SummaryStep: React.FC<SummaryStepProps> = (props) => {
+  const handlePreviousClick = () => {
+    props.pb("age");
+  };
   return (
     <>
       <div>
         {FIRST_NAME} {props.collectedData.firstName}
       </div>
-
       <div>
         {LAST_NAME} {props.collectedData.lastName}
       </div>
@@ -33,6 +37,7 @@ const SummaryStep: React.FC<SummaryStepProps> = (props) => {
       <div>
         {AGE} {props.collectedData.age}
       </div>
+      <button onClick={handlePreviousClick}>{PREVIOUS}</button>{" "}
       <div>
         <Link to="/purchased=dev_ins">{PURCHASE}</Link>
       </div>
