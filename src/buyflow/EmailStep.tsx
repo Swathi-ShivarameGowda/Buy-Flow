@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { ERROR_MSG, EMAIL } from "../constants/constants";
+import {
+  ERROR_MSG,
+  EMAIL,
+  NEXT,
+  EMAIL_REGEX,
+  VALID_EMAIL_ERROR
+} from "../constants/constants";
 
 interface EmailStepProps {
   cb: (field: string, value: string) => void;
@@ -9,7 +15,18 @@ const EmailStep: React.FC<EmailStepProps> = (props) => {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const handleClick = () => {
-    return email ? props.cb("email", email) : setError(ERROR_MSG);
+    if (email) {
+      if (!EMAIL_REGEX.test(email)) {
+        setError(VALID_EMAIL_ERROR);
+      } else {
+        props.cb("email", email);
+      }
+    } else {
+      setError(ERROR_MSG);
+    }
+  };
+  const handleChange = (value) => {
+    setEmail(value);
   };
 
   return (
@@ -18,14 +35,12 @@ const EmailStep: React.FC<EmailStepProps> = (props) => {
         {EMAIL}{" "}
         <input
           type="email"
-          onChange={({ target: { value } }) => {
-            setEmail(value);
-          }}
+          onChange={(e) => handleChange(e.target.value)}
           value={email}
         ></input>
       </div>
       {error && <p>{error}</p>}
-      <button onClick={handleClick}>Next</button>
+      <button onClick={handleClick}>{NEXT}</button>
     </>
   );
 };

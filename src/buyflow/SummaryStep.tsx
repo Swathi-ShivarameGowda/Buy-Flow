@@ -1,6 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { AGE, EMAIL, FIRST_NAME, LAST_NAME } from "../constants/constants";
+import {
+  AGE,
+  EMAIL,
+  FIRST_NAME,
+  LAST_NAME,
+  PURCHASE
+} from "../constants/constants";
 
 interface SummaryStepProps {
   collectedData: {
@@ -17,6 +23,7 @@ const SummaryStep: React.FC<SummaryStepProps> = (props) => {
       <div>
         {FIRST_NAME} {props.collectedData.firstName}
       </div>
+
       <div>
         {LAST_NAME} {props.collectedData.lastName}
       </div>
@@ -27,7 +34,7 @@ const SummaryStep: React.FC<SummaryStepProps> = (props) => {
         {AGE} {props.collectedData.age}
       </div>
       <div>
-        <Link to="/purchased=dev_ins">Purchase</Link>
+        <Link to="/purchased=dev_ins">{PURCHASE}</Link>
       </div>
     </>
   );

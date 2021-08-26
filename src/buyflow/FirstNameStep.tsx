@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { ERROR_MSG, FIRST_NAME } from "../constants/constants";
+import {
+  ERROR_MSG,
+  FIRST_NAME,
+  NAME_REGEX,
+  NEXT,
+  VALID_NAME_ERROR
+} from "../constants/constants";
 
 interface FirstNameStepProps {
   cb: (field: string, value: string) => void;
@@ -8,23 +14,35 @@ interface FirstNameStepProps {
 const FirstNameStep: React.FC<FirstNameStepProps> = (props) => {
   const [firstName, setFirstName] = useState("");
   const [error, setError] = useState("");
+
   const handleClick = () => {
-    return firstName ? props.cb("firstName", firstName) : setError(ERROR_MSG);
+    if (firstName) {
+      if (!NAME_REGEX.test(firstName)) {
+        setError(VALID_NAME_ERROR);
+      } else {
+        props.cb("firstName", firstName);
+      }
+    } else {
+      setError(ERROR_MSG);
+    }
   };
+
+  const handleChange = (value) => {
+    setFirstName(value);
+  };
+
   return (
     <>
       <div>
         {FIRST_NAME}{" "}
         <input
           type="firstName"
-          onChange={({ target: { value } }) => {
-            setFirstName(value);
-          }}
+          onChange={(e) => handleChange(e.target.value)}
           value={firstName}
         ></input>
       </div>
       {error && <p>{error}</p>}
-      <button onClick={handleClick}>Next</button>
+      <button onClick={handleClick}>{NEXT}</button>
     </>
   );
 };
